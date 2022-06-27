@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="myForm" novalidate style="font-size: 2rem;" action="/register" method="post">
+        <p>Username:<br>
+            <input type="text" name="user" ng-model="user" required>
+            <br>
+            <span style="color:red" ng-show="myForm.user.$dirty && myForm.user.$invalid">
+                <small ng-show="myForm.user.$error.required">Username is required.</small>
+            </span>
+        </p>
+
+        <p>Email:<br>
+            <input type="email" name="email" ng-model="email" required>
+            <br>
+            <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+                <small ng-show="myForm.email.$error.required">Email is required.</small>
+                <small ng-show="myForm.email.$error.email">Invalid email address.</small>
+            </span>
+        </p>
+
+        <p>Password:<br>
+            <input type="password" name="password" ng-model="password" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/" required>
+            <br>
+            <span style="color:red" ng-show="myForm.password.$dirty && myForm.password.$invalid">
+                <small ng-show="myForm.password.$error.required">Password is required.</small>
+                <small ng-show="myForm.password.$error.password">Invalid password.</small>
+            </span>
+        </p>
+
+        <p>Confirm password:<br>
+            <input type="password" name="cpassword" ng-model="cpassword" required>
+            <br>
+            <span style="color:red" ng-show="myForm.cpassword.$dirty && myForm.cpassword.$invalid">
+                <small ng-show="myForm.cpassword.$error.required">Confirm password is required.</small>
+                <small ng-show="myForm.cpassword.$error.password">Invalid password.</small>
+            </span>
+        </p>
+        <small style="color: aqua;cursor: pointer;"><a href="./login.html">Already have an account ?</a></small>
+        <p>
+            <input type="submit" class="btn" ng-disabled="myForm.user.$dirty && myForm.user.$invalid ||
+            myForm.email.$dirty && myForm.email.$invalid">
+        </p>
+
+</form>
+
+</body>
+</html>

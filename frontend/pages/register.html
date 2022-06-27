@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopHub</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body ng-app="myapp" ng-controller="ctrl" >
+    
+<!-- header section starts  -->
+
+<header class="header" style="text-align: center;">
+    <a href="../index.html" class="logo"> <i class="fas fa-archive"></i> ShopHub </a>    
+</header>
+<section class="form" id="form">
+<div class="content" style="margin: 1%;">
+    <div class="box-container" style="padding: 30%;">
+        <div class="box" style="text-align: center;">
+            <a href="/index.html" class="logo"  style="font-size: 2.5rem;
+            font-weight: bolder;color: #130f40;"> <i class="fas fa-archive" style="color: green;" ></i></a>
+            <h1 style="margin-top: 4%;font-size: 3.3rem;color: #130f40;"><span >Register</span></h1>
+            <div class="box-content">
+                <form name="myForm" novalidate style="font-size: 2rem;" ng-submit="submit()" >
+                    <p>Username:<br>
+                        <input type="text" name="user" ng-model="user" required>
+                        <br>
+                        <span style="color:red" ng-show="myForm.user.$dirty && myForm.user.$invalid">
+                            <small ng-show="myForm.user.$error.required">Username is required.</small>
+                        </span>
+                    </p>
+
+                    <p>Email:<br>
+                        <input type="email" name="email" ng-model="email" required>
+                        <br>
+                        <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+                            <small ng-show="myForm.email.$error.required">Email is required.</small>
+                            <small ng-show="myForm.email.$error.email">Invalid email address.</small>
+                        </span>
+                    </p>
+
+                    <p>Password:<br>
+                        <input type="password" name="password" ng-model="password" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/" required>
+                        <br>
+                        <span style="color:red" ng-show="myForm.password.$dirty && myForm.password.$invalid">
+                            <small ng-show="myForm.password.$error.required">Password is required.</small>
+                            <small ng-show="myForm.password.$error.password">Invalid password.</small>
+                        </span>
+                    </p>
+
+                    <p>Confirm password:<br>
+                        <input type="password" name="cpassword" ng-model="cpassword" required>
+                        <br>
+                        <span style="color:red" ng-show="myForm.cpassword.$dirty && myForm.cpassword.$invalid">
+                            <small ng-show="myForm.cpassword.$error.required">Confirm password is required.</small>
+                            <small ng-show="myForm.cpassword.$error.password">Invalid password.</small>
+                        </span>
+                    </p>
+                    <small style="color: aqua;cursor: pointer;"><a href="./login.html">Already have an account ?</a></small>
+                    <p>
+                        <input type="submit" class="btn" ng-disabled="myForm.user.$dirty && myForm.user.$invalid ||
+                        myForm.email.$dirty && myForm.email.$invalid">
+                    </p>
+
+</form>
+
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+<script>
+
+    var app = angular.module('myapp', []);
+app.controller('ctrl', function($scope) {
+     $scope.submit=function(){
+        fetch("http://127.0.0.1:5000/register", {
+     method: "POST",
+     body: JSON.stringify({
+        "user":String(myForm.user.value),
+         "email":String(myForm.email.value),
+         "password":String(myForm.password.value),
+         "confirmpassword":String(myForm.cpassword.value)
+     }),
+     headers: {
+         "Content-type": "application/json; charset=UTF-8"
+     }
+ })
+ .then(response => response.json())
+ .then(json => {
+    console.log(json);
+    if(json.success)
+    {
+        alert('User registered successfully');
+        location.replace("http://127.0.0.1:5500/frontend/index.html#!/");
+    }else{
+        alert('User already present!!!');
+    }
+});
+}
+});
+
+</script>
+
+</body>
+</html>

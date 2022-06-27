@@ -1,0 +1,10 @@
+<h1>About Us</h1>
+
+<p>ShopHub in India makes relentless efforts to build a convenient ecosystem for sellers and expand business development teams across the country to onboard sellers who are looking to expand their business in global markets. We are enabling a global market presence that will help you grow your business despite nationalities. As ShopHub is open 24/7, sellers on any day can build businesses.
+
+We are acting as an intermediate to make selling across the globe a streamlined and effortless process. ShopHub signed an MoU (Memorandum of Understanding) with the Government of Uttar Pradesh for its ‘One District One Product’ that will enable MSMEs (Ministry of Micro, Small, and Medium Enterprises) in the state to sell internationally across 190 markets by leveraging ShopHub’s platform.</p>body: JSON.stringify({
+         "user":String(myForm.user),
+         "email":String(myForm.email),
+         "password":String(myForm.password),
+         "confirmpassword":String(myForm.cpassword)
+     }),

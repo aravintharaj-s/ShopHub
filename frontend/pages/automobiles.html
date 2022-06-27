@@ -1,0 +1,61 @@
+<div ng-app="myapp" ng-controller="actrl">
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+    <a href="#!/home" class="logo"> <i class="fas fa-archive"></i> ShopHub </a>
+
+    <nav class="navbar">
+        <a href="#!/home">Home</a>
+        <a href="#!/electronics">Electronics</a>
+        <a href="#!/automobiles">Automobiles</a>
+        <a href="#!/sports">Sports</a>
+        <a href="#!/miscellaneous">Miscellaneous</a>
+        <a href="#!/sell" style="border-bottom: 4px solid green;font-size: 30px;">Sell</a>
+    </nav>
+
+    <div class="search">
+        <input type="search" name="search" placeholder="search here..." ng-model="search">
+        <button type="submit"> <i class="fas fa-search"></i></button>
+    </div>
+    
+</header>
+
+
+
+
+<section class="auto" id="auto">
+
+    <h1 class="heading"><span>Automobiles</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box" ng-repeat="item in auitems | filter:search">
+            <img src="{{item.src}}" alt="">
+            <div class="content">
+                <div class="icons">
+                    <a href="#"> <i class="fas fa-user"></i>{{ item.user }}</a>
+                    <a href="#"style="font-size: 2.2rem;color:#130f40" > <i class="fas fa-rupee-sign"></i>{{ item.price }}</a>
+                    <a href="#"> <i class="fas fa-calendar"></i>{{ item.date }}</a>
+                </div>
+                <h3 style="margin-left: 120px;">{{item.name}}</h3>
+                <p>{{item.desc}}</p>
+                <div >
+                    <div href="" class="btn" style="margin-left: 75px;" ng-click="add(item)">Add to Cart</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+<section class="cart">
+    <h1>Your Cart:</h1>
+    <div class="box-container">
+        <div class="box" ng-repeat="item in cart">
+          <h3>Item Name : <span>{{ item.name }}</span></h3>
+          <button class="btn" ng-click="removeItem(item);">Remove Item</button>
+    </div></div>
+    <button class="btn" ng-click="clearCart();">Clear Cart</button>
+</section>
